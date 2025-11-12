@@ -41,7 +41,6 @@ export const Joystick: React.FC<JoystickProps> = ({
   baseColor = "rgba(0, 0, 0, 0.3)",
   stickColor = "rgba(0, 0, 0, 0.6)",
 }) => {
-  console.log("In Joystick()");
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
 
@@ -58,7 +57,6 @@ export const Joystick: React.FC<JoystickProps> = ({
 
   const panGesture = Gesture.Pan()
     .onUpdate((event) => {
-      console.log("In Joystick.onUpdate()");
       const distance = Math.sqrt(event.translationX ** 2 + event.translationY ** 2);
 
       if (distance <= maxDistance) {
@@ -74,7 +72,6 @@ export const Joystick: React.FC<JoystickProps> = ({
       reportMove(translateX.value, translateY.value);
     })
     .onEnd(() => {
-      console.log("In Joystick.onEnd()");
       translateX.value = withSpring(0, { damping: 15, stiffness: 150 });
       translateY.value = withSpring(0, { damping: 15, stiffness: 150 });
       reportMove(0, 0);
